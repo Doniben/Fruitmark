@@ -22,9 +22,7 @@ const api = process.env.API_URL;
 app.use(`/${api}/cities`, citiesRoutes);
 app.use(`/${api}/fruits`, fruitsRoutes);
 app.use(`/${api}/users`, usersRoutes);
-// app.use(`${api}/orders`, ordersRoutes); 
 
-//Database
 //DB Config
 const db = process.env.MONGO_URI
 mongoose.connect(db, {
