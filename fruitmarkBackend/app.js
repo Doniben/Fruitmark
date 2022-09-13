@@ -14,6 +14,7 @@ app.options("*", cors());
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(authJwt());
+app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
 app.use(errorHandler);
 
 //Routes
@@ -38,5 +39,5 @@ mongoose.connect(db, {
 
 //Server
 app.listen(process.env.PORT, () => {
-  console.log(`server is running http://localhost:${ process.env.PORT }`);
+  console.log(`server is running on Port:${ process.env.PORT }`);
 });
