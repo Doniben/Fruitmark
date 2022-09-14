@@ -86,6 +86,9 @@ router.put("/:id", uploadOptions.single("image"), async (req, res) => {
   const city = await City.findById(req.body.city);
   if (!city) return res.status(400).send("Invalid City");
 
+  const fruit = await Fruit.findById(req.params.id);
+    if (!fruit) return res.status(400).send('Invalid Product!');
+
   const file = req.file;
   let imagepath;
 
