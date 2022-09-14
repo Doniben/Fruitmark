@@ -8,88 +8,133 @@ import {
   Button,
 } from "react-native";
 import { Left, Right, Container, H1 } from "native-base";
-// import Toast from "react-native-toast-message";
-import EasyButton from "../../Shared/StyledComponents/EasyButton";
-import TrafficLight from "../../Shared/StyledComponents/TrafficLight";
 
 //!import { connect } from "react-redux";
 //!import * as actions from "../../Redux/Actions/cartActions";
 
 const SingleFruit = (props) => {
   const [item, setItem] = useState(props.route.params.item);
-  const [availability, setAvailability] = useState(null);
-  const [availabilityText, setAvailabilityText] = useState("");
-
-  useEffect(() => {
-    if (props.route.params.item.countInStock == 0) {
-      setAvailability(<TrafficLight unavailable></TrafficLight>);
-      setAvailabilityText("Unvailable");
-    } else if (props.route.params.item.countInStock <= 5) {
-      setAvailability(<TrafficLight limited></TrafficLight>);
-      setAvailabilityText("Limited Stock");
-    } else {
-      setAvailability(<TrafficLight available></TrafficLight>);
-      setAvailabilityText("Available");
-    }
-
-    return () => {
-      setAvailability(null);
-      setAvailabilityText("");
-    };
-  }, []);
 
   return (
-    <Container style={styles.container}>
-      <ScrollView style={{ marginBottom: 80, padding: 5 }}>
-      <Text>Prueba en Single</Text>
-        <View>
-          <Image
-            source={{
-              uri: item.image
-                ? item.image
-                : "https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png",
-            }}
-            resizeMode="contain"
-            style={styles.image}
-          />
-        </View>
-        {/* <View style={styles.contentContainer}>
-          <H1 style={styles.contentHeader}>{item.name}</H1>
-          <Text style={styles.contentText}>{item.countInStock}</Text>
-        </View> */}
-        <View style={styles.availabilityContainer}>
-          <View style={styles.availability}>
-            <Text style={{ marginRight: 10 }}>
-              Availability: {availabilityText}
-            </Text>
-            {availability}
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "#FFF",
+      }}
+    >
+      <View
+        style={{
+          flexDirection: "row",
+          width: "100%",
+          height: "90%",
+        }}
+      >
+        
+        <View style={{ width: "100%" }}>
+          <View style={styles.slide}>
+            <Image
+              source={{ uri: item.image }}
+              style={{
+                marginLeft: 100,
+                marginBottom: 130,
+                height: "90%",
+                width: "140%",
+                marginTop: 0,
+                resizeMode: "stretch",
+              }}
+            />
           </View>
         </View>
-      </ScrollView>
+      </View>
 
-      <View style={styles.bottomContainer}>
-        {/* <Left> */}
-          <Text style={styles.countInStock}>{item.countInStock}</Text>
-        {/* </Left> */}
-        {/* <Right> */}
-          <EasyButton
-            primary
-            medium
-            onPress={() => {
-              props.addItemToCart(item.id),
-                Toast.show({
-                  topOffset: 60,
-                  type: "success",
-                  text1: `${item.name} added to Cart`,
-                  text2: "Go to your cart to complete order",
-                });
+      <View
+        style={{
+          flexDirection: "row",
+          marginTop: -80,
+          marginHorizontal: 20,
+          alignItems: "center",
+        }}
+      >
+        <Text
+          style={{
+            fontWeight: "bold",
+            fontSize: 28,
+            color: "#62636a",
+          }}
+        >
+          {item.name}
+        </Text>
+        <Text
+          style={{
+            fontWeight: "bold",
+            color: "#00a46c",
+            paddingLeft: 170,
+            fontSize: 20,
+          }}
+        >
+          In stock: {item.countInStock}
+        </Text>
+      </View>
+
+      <Text
+        style={{
+          paddingHorizontal: 20,
+          fontWeight: "bold",
+          color: "#b1e5d3",
+          paddingTop: 3,
+          fontSize: 20,
+        }}
+      >
+        {item.city.name}
+      </Text>
+
+      <View
+        style={{
+          flexDirection: "row",
+          width: "100%",
+        }}
+      >
+        <View
+          style={{
+            width: "50%",
+            backgroundColor: "#00a46c",
+            height: 70,
+            marginTop: 20,
+            borderTopRightRadius: 25,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text
+            style={{
+              color: "#FFF",
+              fontSize: 17,
             }}
           >
-            <Text style={{ color: "white" }}>Add</Text>
-          </EasyButton>
-        {/* </Right> */}
+            See other Cities
+          </Text>
+        </View>
+
+        <View
+          style={{
+            width: "50%",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: 20,
+          }}
+        >
+          <Text
+            style={{
+              color: "#62636a",
+              fontWeight: "bold",
+              fontSize: 17,
+            }}
+          >
+            Send to another city
+          </Text>
+        </View>
       </View>
-    </Container>
+    </View>
   );
 };
 
@@ -109,6 +154,12 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 0,
     margin: 0,
+  },
+  slide: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#FFF",
   },
   image: {
     width: "100%",
@@ -151,6 +202,5 @@ const styles = StyleSheet.create({
 });
 
 export default SingleFruit;
-
 
 //! export default connect(null, mapToDispatchToProps)(SingleFruit);
