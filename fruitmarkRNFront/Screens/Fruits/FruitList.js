@@ -1,5 +1,6 @@
 import React from "react";
-import { TouchableOpacity, View, Dimensions } from "react-native";
+import { TouchableOpacity, View, Dimensions, ScrollView } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 import FruitCard from "./FruitCard";
 
@@ -14,23 +15,11 @@ const FruitList = (props) => {
         props.navigation.navigate("Fruit Detail", { item: item })
       }
     >
-      <View style={{ width: width / 2, backgroundColor: "gainsboro" }}>
+      <View style={{ width: width }}>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={true}
-          style={{ height: 400 }}
         >
-          <LinearGradient
-            colors={["rgba(0,164,109,0.09)", "transparent"]}
-            style={{
-              position: "absolute",
-              left: 0,
-              right: 0,
-              height: 100,
-              marginTop: 200,
-              top: 0,
-            }}
-          />
           <FruitCard {...item} />
         </ScrollView>
       </View>
