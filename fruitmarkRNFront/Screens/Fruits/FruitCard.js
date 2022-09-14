@@ -20,7 +20,7 @@ const FruitCard = (props) => {
   return (
     <View style={styles.container}>
       <Image
-        style={{height: 50, width: 50}}
+        style={styles.image}
         resizeMode="contain"
         source={{
           uri: image
@@ -44,23 +44,24 @@ const FruitCard = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: width / 2 - 20,
-    height: width / 1.7,
+    width: "85%",
+    height: width / 1.9,
     padding: 10,
     borderRadius: 10,
-    marginTop: 55,
+    marginTop: 45,
     marginBottom: 5,
     marginLeft: 10,
+    marginRight: 10,
     alignItems: "center",
     elevation: 8,
     backgroundColor: "white",
   },
   image: {
-    width: 60,
-    height: 60,
-    /* backgroundColor: "transparent",
+    width: 160,
+    height: 160,
+    backgroundColor: "transparent",
     position: "absolute",
-    top: -45, */
+    top: -45,
   },
   card: {
     marginBottom: 10,
@@ -69,14 +70,16 @@ const styles = StyleSheet.create({
     width: width / 2 - 20 - 10,
   },
   title: {
+    paddingBottom: 10,
     fontWeight: "bold",
-    fontSize: 14,
-    textAlign: "center",
+    fontSize: 20,
+    textAlign: "left"
   },
   countInStock: {
-    fontSize: 20,
-    color: "orange",
+    fontSize: 25,
+    color: "rgba(0,164,109,1)",
     marginTop: 10,
+    fontWeight: "bold",
   },
 });
 
