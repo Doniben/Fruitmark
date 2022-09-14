@@ -42,7 +42,7 @@ const CityFilter = (props) => {
                   : styles.inactive,
               ]}
             >
-              <Text style={{ color: "white" }}>{item.name}</Text>
+              <Text style={{ color: "white", fontSize: 17 }}>{item.name}</Text>
             </Badge>
           </TouchableOpacity>
         ))}
@@ -54,12 +54,13 @@ const styles = StyleSheet.create({
   center: {
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 10,
   },
   active: {
-    backgroundColor: "#03bafc",
+    backgroundColor: "#00a46c",
   },
   inactive: {
-    backgroundColor: "#a0e1eb",
+    backgroundColor: "#a1c2b7",
   },
 });
 
