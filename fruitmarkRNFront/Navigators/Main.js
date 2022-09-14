@@ -36,8 +36,8 @@ const Main = () => {
       name="Fruitmark"
       component={HomeNavigator}
       options={{
-        tabBarIcon: ({ color }) => (
-          <Icon name="home" color={color} size={30} />
+        tabBarIcon: () => (
+          <Icon name="home" color={"rgba(0,164,109,1)"} size={30} />
         ),
         headerShown: false
       }}
