@@ -227,6 +227,120 @@
 				"header": []
 			},
 			"response": []
+		},
+		{
+			"name": "Update images in fruit",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzIwMjY4MWExODM3ZTkzMjVhOWJmMDAiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjYzMDUxNDUxLCJleHAiOjE2NjM2NTYyNTF9.Yv-R8q5jjMtAhc_h_ePhj6Cah1UDbT-N7sS_KWK-OKA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/Users/doniben/Downloads/apple1.png"
+						},
+						{
+							"key": "city",
+							"value": "631ffa9082b39f825f34afa7",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Apple",
+							"type": "text"
+						},
+						{
+							"key": "countInStock",
+							"value": "20",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5100/api/v1/fruits/631ffc5870a68783684a6039",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5100",
+					"path": [
+						"api",
+						"v1",
+						"fruits",
+						"631ffc5870a68783684a6039"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update image gallery",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzIwMjY4MWExODM3ZTkzMjVhOWJmMDAiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjYzMDUxNDUxLCJleHAiOjE2NjM2NTYyNTF9.Yv-R8q5jjMtAhc_h_ePhj6Cah1UDbT-N7sS_KWK-OKA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/Users/doniben/Downloads/apple1.png"
+						},
+						{
+							"key": "city",
+							"value": "631ffa9082b39f825f34afa7",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Apple",
+							"type": "text"
+						},
+						{
+							"key": "countInStock",
+							"value": "20",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5100/api/v1/fruits/631ffc5870a68783684a6039",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5100",
+					"path": [
+						"api",
+						"v1",
+						"fruits",
+						"631ffc5870a68783684a6039"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
