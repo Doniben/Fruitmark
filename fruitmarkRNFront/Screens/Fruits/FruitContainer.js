@@ -16,8 +16,6 @@ import baseURL from "../../assets/common/baseURL";
 import axios from "axios";
 
 import FruitList from "./FruitList";
-import SearchedFruit from "./SearchedFruits";
-import Banner from "../../Shared/Banner";
 import CityFilter from "./CityFilter";
 
 var { height } = Dimensions.get("window");
@@ -107,9 +105,9 @@ const FruitContainer = (props) => {
       <View
         style={{
           backgroundColor: "#00a46c",
-          height: "80%",
-          borderBottomLeftRadius: 20,
-          borderBottomRightRadius: 20,
+          height: "95%",
+          borderBottomLeftRadius: 50,
+          borderBottomRightRadius: 50,
           paddingHorizontal: 20,
         }}
       >
@@ -135,6 +133,8 @@ const FruitContainer = (props) => {
                 fontSize: 22,
                 color: "#FFF",
                 fontWeight: "bold",
+                marginTop: -30,
+                backgroundColor: "transparent"
               }}
             >
               Fruitmark
@@ -143,37 +143,34 @@ const FruitContainer = (props) => {
           <View style={{ width: "50%", alignItems: "flex-end" }}>
             <Image
               source={require("../../assets/fm-logo.png")}
-              style={{ height: 60, width: 60 }}
+              style={{ height: 110, width: 110, marginTop: -30 }}
             />
           </View>
         </View>
       </View>
-      <LinearGradient
-        colors={["rgba(0,164,109,0.4)", "transparent"]}
+    </SafeAreaView>
+        <View style={{display: 'flex', alignItems: 'center'}}>
+          <CityFilter
+            cities={cities}
+            cityFilter={changeCtg}
+            fruitsCtg={fruitsCtg}
+            active={active}
+            setActive={setActive}
+          />
+        </View>
+        <ScrollView>
+        <LinearGradient
+        colors={["rgba(0,164,109,0.3)", "transparent"]}
         style={{
+          position: "absolute",
           left: 0,
           right: 0,
-          height: 90,
-          marginTop: -45,
+          height: 100,
+          marginTop: 0,
+          top: 0,
         }}
-      >
-
-      </LinearGradient>
-    </SafeAreaView>
-      <ScrollView>
+      />
         <View>
-          <View>
-            <Banner />
-          </View>
-          <View style={{display: 'flex', alignItems: 'center'}}>
-            <CityFilter
-              cities={cities}
-              cityFilter={changeCtg}
-              fruitsCtg={fruitsCtg}
-              active={active}
-              setActive={setActive}
-            />
-          </View>
           {fruitsCtg.length > 0 ? (
             <View style={styles.listContainer}>
               {fruitsCtg.map((item) => {
@@ -201,24 +198,23 @@ const FruitContainer = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexWrap: "wrap",
     backgroundColor: "gainsboro",
   },
   header: {
     width: "100%",
-    height: "28%",
+    height: "21%",
     flexDirection: "row",
     alignContent: "center",
     justifyContent: "center",
     padding: 0,
   },
   listContainer: {
-    height: height,
+    height: "100%",
     flex: 1,
     flexDirection: "row",
-    alignItems: "flex-start",
     flexWrap: "wrap",
-    backgroundColor: "gainsboro",
+    alignItems: "flex-start",
+    backgroundColor: "rgba(0,164,109, 0.1)"
   },
   center: {
     justifyContent: "center",
