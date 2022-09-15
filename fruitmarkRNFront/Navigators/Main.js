@@ -6,16 +6,16 @@ import Icon from "react-native-vector-icons/FontAwesome";
 // Stacks
 import HomeNavigator from "./HomeNavigator";
 // import CartNavigator from "./CartNavigator";
-// import UserNavigator from "./UserNavigator";
-// import AdminNavigator from "./AdminNavigator";
+import UserNavigator from "./UserNavigator";
+import AdminNavigator from "./AdminNavigator";
 
 // import CartIcon from "../Shared/CartIcon";
-// import AuthGlobal from "../Context/store/AuthGlobal";t
+import AuthGlobal from "../Context/store/AuthGlobal";
 
 const Tab = createBottomTabNavigator();
 
 const Main = () => {
-  //! const context = useContext(AuthGlobal);
+  const context = useContext(AuthGlobal);
 
   return (
     <Tab.Navigator
@@ -28,34 +28,42 @@ const Main = () => {
           {
             display: "flex",
           },
-          null
-        ]
+          null,
+        ],
       }}
     >
-    <Tab.Screen
-      name="Fruitmark"
-      component={HomeNavigator}
-      options={{
-        tabBarIcon: () => (
-          <Icon name="home" color={"rgba(0,164,109,1)"} size={30} />
-        ),
-        headerShown: false
-      }}
-    />
-      
-      
+      <Tab.Screen
+        name="Fruitmark"
+        component={HomeNavigator}
+        options={{
+          tabBarIcon: () => (
+            <Icon name="home" color={"rgba(0,164,109,1)"} size={30} />
+          ),
+          headerShown: false,
+        }}
+      />
 
+      {context.stateUser.user.isAdmin == true ? (
+        <Tab.Screen
+          name="Admin"
+          component={AdminNavigator}
+          options={{
+            tabBarIcon: () => (
+              <Icon name="cog" color={"rgba(0,164,109,1)"} size={30} />
+            ),
+          }}
+        />
+      ) : null}
 
-
-      {/* <Tab.Screen
+      <Tab.Screen
         name="User"
         component={UserNavigator}
         options={{
-          tabBarIcon: ({ color }) => (
-            <Icon name="user" color={color} size={30} />
+          tabBarIcon: () => (
+            <Icon name="user" color={"rgba(0,164,109,1)"} size={30} />
           ),
         }}
-      /> */}
+      />
     </Tab.Navigator>
   );
 };
