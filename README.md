@@ -1,5 +1,8 @@
 # Fruitmark
-Fullstack mobile application created with React Native and NodeJs
+Fullstack mobile application created with React Native and NodeJs.
+
+![fast](https://user-images.githubusercontent.com/51678086/191316266-e9a62776-b81d-4a10-995b-a74dbb4bb3e8.gif)
+
 
 ### Installation of dev environtment
 
