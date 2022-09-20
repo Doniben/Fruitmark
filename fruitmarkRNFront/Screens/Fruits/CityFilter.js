@@ -7,7 +7,7 @@ const CityFilter = (props) => {
     <ScrollView
       bounces={true}
       horizontal={true}
-      style={{ backgroundColor: "#f2f2f2" }}
+      style={{ backgroundColor: "rgba(0,164,109,0.01)" }}
     >
         <TouchableOpacity
           key={1}
