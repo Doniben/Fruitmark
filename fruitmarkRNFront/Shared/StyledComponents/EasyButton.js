@@ -3,19 +3,20 @@ import styled, { css } from "styled-components";
 const EasyButton = styled.TouchableOpacity`
   flex-direction: row;
   border-radius: 3px;
+  border-color: solid 2px rgba(0,164,109,1);
   padding: 10px;
   margin: 5px;
   justify-content: center;
-  background: transparent;
+  background: rgba(0,164,109,0.1);
   ${(props) =>
     props.primary &&
     css`
-      background: #5cb85c;
+      background: rgba(0,164,109,1);
     `}
   ${(props) =>
     props.secondary &&
     css`
-      background: #62b1f6;
+      background: rgba(0,164,109,1);
     `}
     ${(props) =>
     props.danger &&
