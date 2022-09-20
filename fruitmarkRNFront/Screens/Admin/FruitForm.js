@@ -19,26 +19,36 @@ import baseURL from "../../assets/common/baseURL";
 import axios from "axios";
 import * as ImagePicker from "expo-image-picker";
 import mime from "mime";
+import RNPickerSelect from "react-native-picker-select";
+import SelectDropdown from 'react-native-select-dropdown'
 
 const FruitForm = (props) => {
-  const [pickerValue, setPickerValue] = useState();
+  const cities = ["Marseille", "Paris", "Dijon", "Nice", "Lille"]
+  const fruits = ["Orange", "Banana", "Apple", "Srawberry", "Cherry"]
+  const [value, setValue] = useState()
+  /* const [pickerValue, setPickerValue] = useState();
   const [name, setName] = useState();
-  const [mainImage, setMainImage] = useState();
+  const [image, setImage] = useState();
   const [city, setCity] = useState();
   const [cities, setCities] = useState([]);
   const [token, setToken] = useState();
   const [err, setError] = useState();
   const [countInStock, setCountInStock] = useState();
-  const [item, setItem] = useState(null);
+  const [srcItem, setSrcItem] = useState();
+  const [desItem, setDesItem] = useState();
+  const [itemId, setItemId] = useState() */
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (!props.route.params) {
-      setItem(null);
+      setSrcItem(null);
+      setDesItem(null);
     } else {
-      setItem(props.route.params.item);
+      setSrcItem(props.route.params.item);
+      setDesItem(props.route.params.item);
       setName(props.route.params.item.name);
-      setMainImage(props.route.params.item.image);
+      setImage(props.route.params.item.image);
       setCity(props.route.params.item.city._id);
+      setItemId(props.route.params.item._id);
       setCountInStock(props.route.params.item.countInStock.toString());
     }
 
@@ -54,55 +64,59 @@ const FruitForm = (props) => {
       .then((res) => setCities(res.data))
       .catch((error) => alert("Error to load cities"));
 
-    // Image Picker
-    (async () => {
-      if (Platform.OS !== "web") {
-        const { status } = await ImagePicker.requestCameraPermissionsAsync();
-        if (status !== "granted") {
-          alert("Sorry, we need camera roll permissions to make this work!");
-        }
-      }
-    })();
+    // Fruits
+    axios
+      .get(`${baseURL}fruits`)
+      .then((res) => setItem(res.data))
+      .catch((error) => alert("Error to load fruits"));
 
     return () => {
       setCities([]);
+      setItem([]);
     };
-  }, []);
+  }, []); */
 
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
+  const sendFruit = () => {
+    Toast.show({
+      topOffset: 60,
+      type: "success",
+      text1: "Fruits successfully sent",
+      text2: "",
     });
-
-    if (!result.cancelled) {
-      setMainImage(result.uri);
-    }
-  };
-
-  const addFruit = () => {
-    if (
-      name == "" ||
-      city == "" ||
+    Toast.show({
+      topOffset: 60,
+      type: "success",
+      text1: "Fruits successfully sent",
+      text2: "",
+    });
+    props.navigation.navigate("Fruits")
+    /* if (
+      srcName == "" ||
+      SrcCity == "" ||
+      desName == "" ||
+      desCity == "" ||
       countInStock == ""
     ) {
       setError("Please fill in the form correctly");
     }
 
-    let formData = new FormData();
+    let formDataSrc = new FormData();
 
-    const newImageUri = "file:///" + image.split("file:/").join("");
+    const image = itemSrc.image;
 
-    formData.append("image", {
-      uri: newImageUri,
-      type: mime.getType(newImageUri),
-      name: newImageUri.split("/").pop(),
-    });
-    formData.append("name", name);
-    formData.append("city", city);
-    formData.append("countInStock", countInStock);
+    formDataSrc.append("image", image);
+    formDataSrc.append("name", name);
+    formDataSrc.append("city", city);
+    formDataSrc.append("countInStock", countInStock - pickerValue);
+
+    let formDataDes = new FormData();
+
+    const imageDes = itemDes.image;
+
+    formDataDes.append("image", imageDes);
+    formDataDes.append("name", name);
+    formDataDes.append("city", city);
+    formDataDes.append("countInStock", countInStock + pickerValue);
 
     const config = {
       headers: {
@@ -111,39 +125,15 @@ const FruitForm = (props) => {
       },
     };
 
-    if (item !== null) {
+    if (itemSrc !== null) {
       axios
-        .put(`${baseURL}fruits/${item.id}`, formData, config)
+        .put(`${baseURL}fruits/${item.id}`, formDataSrc, config)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
             Toast.show({
               topOffset: 60,
               type: "success",
-              text1: "Fruit successfuly updated",
-              text2: "",
-            });
-            setTimeout(() => {
-              props.navigation.navigate("Fruits");
-            }, 500);
-          }
-        })
-        .catch((error) => {
-          Toast.show({
-            topOffset: 60,
-            type: "error",
-            text1: "Something went wrong",
-            text2: "Please try again",
-          });
-        });
-    } else {
-      axios
-        .post(`${baseURL}fruits`, formData, config)
-        .then((res) => {
-          if (res.status == 200 || res.status == 201) {
-            Toast.show({
-              topOffset: 60,
-              type: "success",
-              text1: "New Fruit added",
+              text1: "Fruits successfuly sended",
               text2: "",
             });
             setTimeout(() => {
@@ -160,62 +150,142 @@ const FruitForm = (props) => {
           });
         });
     }
-  };
+    if (itemSrc !== null) {
+      axios
+        .put(`${baseURL}fruits/${item.id}`, formDataDes, config)
+        .then((res) => {
+          if (res.status == 200 || res.status == 201) {
+            Toast.show({
+              topOffset: 60,
+              type: "success",
+              text1: "Fruits successfuly received",
+              text2: "",
+            });
+            setTimeout(() => {
+              props.navigation.navigate("Fruits");
+            }, 500);
+          }
+        })
+        .catch((error) => {
+          Toast.show({
+            topOffset: 60,
+            type: "error",
+            text1: "Something went wrong",
+            text2: "Please try again",
+          });
+        });
+    } */
+  }
 
   return (
-    <FormContainer title="Add Fruit" style={{ height: "100%" }}>
-      <View style={styles.imageContainer}>
-        <Text style={{ textDecorationLine: "underline" }}>Brand</Text>
-        <Image style={styles.image} source={{ uri: mainImage }} />
-        <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
-          <Icon style={{ color: "white" }} name="camera" />
-        </TouchableOpacity>
+      <View style={styles.container}>
+        <Text style={styles.span}>Send from:</Text>
+        {/* <RNPickerSelect
+          value ={srcItem.city.name}
+          onValueChange={(value) => {
+            setCity({ ...srcItem, src: value });
+          }}
+          items={[
+            {...cities.map((c) => {
+              return `{ label: ${c.name}, value: ${c._id} }`
+            
+            })}
+          ]}
+        /> */}
+        <SelectDropdown
+          data={cities}
+          onSelect={(selectedItem, index) => {
+            console.log(selectedItem, index)
+          }}
+          buttonTextAfterSelection={(selectedItem, index) => {
+            // text represented after item is selected
+            // if data array is an array of objects then return selectedItem.property to render after item is selected
+            return selectedItem
+          }}
+          rowTextForSelection={(item, index) => {
+            // text represented for each item in dropdown
+            // if data array is an array of objects then return item.property to represent item in dropdown
+            return item
+          }}
+        />
+        
+        <Text style={styles.span}>Send to:</Text>
+        {/* <RNPickerSelect
+          value ={desItem.city.name}
+          onValueChange={(value) => {
+            setCity({ ...desItem, src: value });
+          }}
+          items={[
+            {...cities.map((c) => {
+              return `{ label: ${c.name}, value: ${c._id} }`
+            
+            })}
+          ]}
+        /> */}
+        <SelectDropdown
+          data={cities}
+          onSelect={(selectedItem, index) => {
+            console.log(selectedItem, index)
+          }}
+          buttonTextAfterSelection={(selectedItem, index) => {
+            // text represented after item is selected
+            // if data array is an array of objects then return selectedItem.property to render after item is selected
+            return selectedItem
+          }}
+          rowTextForSelection={(item, index) => {
+            // text represented for each item in dropdown
+            // if data array is an array of objects then return item.property to represent item in dropdown
+            return item
+          }}
+        />
+        <Text style={styles.span}>Fruit to send:</Text>
+{/*         <RNPickerSelect
+          value ="Cherry"
+          onValueChange={(value) => {
+            setCity({ ...name, src: value });
+          }}
+          items={[
+            {...fruit.map((f) => {
+              return `{ label: ${f.name}, value: ${f._id} },`
+            
+            })}
+          ]}
+        /> */}
+        <SelectDropdown
+          data={fruits}
+          onSelect={(selectedItem, index) => {
+            console.log(selectedItem, index)
+          }}
+          buttonTextAfterSelection={(selectedItem, index) => {
+            // text represented after item is selected
+            // if data array is an array of objects then return selectedItem.property to render after item is selected
+            return selectedItem
+          }}
+          rowTextForSelection={(item, index) => {
+            // text represented for each item in dropdown
+            // if data array is an array of objects then return item.property to represent item in dropdown
+            return item
+          }}
+        />
         <View style={styles.label}>
-          <Text style={{ textDecorationLine: "underline" }}>Brand</Text>
+          <Text style={styles.span}>Count to send</Text>
         </View>
-        <View style={styles.label}>
-        <Text style={{ textDecorationLine: "underline" }}>Name</Text>
+        <Input
+          placeholder="Stock"
+          name="stock"
+          id="stock"
+          /* value={pickerValue} */
+          value={value}
+          keyboardType={"numeric"}
+          onChangeText={(num) => setValue(num)}
+          /* onChangeText={(num) => setPickerValue(num)} */
+        />
+        <View style={styles.buttonContainer}>
+          <EasyButton large primary onPress={() => sendFruit()}>
+            <Text style={styles.buttonText}>Confirm</Text>
+          </EasyButton> 
+        </View>
       </View>
-      <Input
-        placeholder="Name"
-        name="name"
-        id="name"
-        value={name}
-        onChangeText={(text) => setName(text)}
-      />
-      <View style={styles.label}>
-        <Text style={{ textDecorationLine: "underline" }}>Count in Stock</Text>
-      </View>
-      <Input
-        placeholder="Stock"
-        name="stock"
-        id="stock"
-        value={countInStock}
-        keyboardType={"numeric"}
-        onChangeText={(text) => setCountInStock(text)}
-      />
-      {/* <Item picker>
-        <Picker
-          mode="dropdown"
-          iosIcon={<Icon name="arrow-down" />}
-          placeholder="Select your City"
-          selectedValue={pickerValue}
-          placeholderStyle={{ color: "#007aff" }}
-          placeholderIconColor="#007aff"
-          onValueChange={(e) => [setPickerValue(e), setCity(e)]}
-        >
-          {cities.map((c) => {
-            return <Picker.Item key={c._id} label={c.name} value={c._id} />;
-          })}
-        </Picker>
-      </Item> */}
-      <View style={styles.buttonContainer}>
-        <EasyButton large primary onPress={() => addFruit()}>
-          <Text style={styles.buttonText}>Confirm</Text>
-        </EasyButton> 
-      </View>
-      </View>
-    </FormContainer>
   );
 };
 
@@ -223,6 +293,11 @@ const styles = StyleSheet.create({
   label: {
     width: "100%",
     marginTop: 10,
+  },
+  span: {
+    fontSize: 20,
+    marginVertical: 8,
+    fontWeight: "bold",
   },
   buttonContainer: {
     width: "100%",
@@ -233,21 +308,15 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
   },
-  imageContainer: {
-    width: 200,
-    height: 200,
-    borderStyle: "solid",
-    borderWidth: 8,
-    padding: 0,
+  container: {
+    width: '100%',
+    height: '90%',
+    padding: 40,
+    flex: 1,
     justifyContent: "center",
-    borderRadius: 100,
-    borderColor: "#E0E0E0",
+    alignItems: "flex-start",
     elevation: 10,
-  },
-  image: {
-    width: "100%",
-    height: "100%",
-    borderRadius: 100,
+    backgroundColor: "rgba(0,164,109,0.1)"
   },
   imagePicker: {
     position: "absolute",
