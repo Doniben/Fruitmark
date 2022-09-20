@@ -129,6 +129,7 @@ const SingleFruit = (props) => {
               fontWeight: "bold",
               fontSize: 17,
             }}
+            onPress={() => props.navigation.navigate("FruitForm")}
           >
             Send to another city
           </Text>
