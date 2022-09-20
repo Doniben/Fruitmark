@@ -51,17 +51,19 @@ const Main = () => {
             tabBarIcon: () => (
               <Icon name="cog" color={"rgba(0,164,109,1)"} size={30} />
             ),
+            headerShown: false,
           }}
         />
       ) : null}
 
       <Tab.Screen
-        name="User"
+        name="Us"
         component={UserNavigator}
         options={{
           tabBarIcon: () => (
             <Icon name="user" color={"rgba(0,164,109,1)"} size={30} />
           ),
+          headerShown: false,
         }}
       />
     </Tab.Navigator>
