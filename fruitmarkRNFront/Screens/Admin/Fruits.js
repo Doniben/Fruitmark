@@ -95,22 +95,14 @@ const Fruits = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
-        {/* <EasyButton
-          secondary
-          medium
-          onPress={() => props.navigation.navigate("Orders")}
-        >
-          <Icon name="shopping-bag" size={18} color="white" />
-          <Text style={styles.buttonText}>Orders</Text>
-        </EasyButton> */}
         <EasyButton
           secondary
           medium
           onPress={() => props.navigation.navigate("FruitForm")}
           syle={{backgroundColor: "rgba(0,164,109,1)"}}
         >
-          <Icon name="plus" size={18} color="white" />
-          <Text style={styles.buttonText}>Fruits</Text>
+          <Icon name="send" size={18} color="white" />
+          <Text style={styles.buttonText}>  Fruits</Text>
         </EasyButton>
         <EasyButton
           secondary
@@ -118,7 +110,7 @@ const Fruits = (props) => {
           onPress={() => props.navigation.navigate("Cities")}
         >
           <Icon name="plus" size={18} color="white" />
-          <Text style={styles.buttonText}>Cities</Text>
+          <Text style={styles.buttonText}>  Cities</Text>
         </EasyButton>
       </View>
 
@@ -149,7 +141,6 @@ const styles = StyleSheet.create({
   listHeader: {
     flexDirection: "row",
     padding: 5,
-    backgroundColor: "gainsboro",
   },
   headerItem: {
     margin: 3,
@@ -161,13 +152,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   container: {
-    marginBottom: 160,
-    backgroundColor: "white",
+    marginBottom: 150,
+    backgroundColor: "rgba(0,164,109,0.4",
   },
   buttonContainer: {
     margin: 20,
     alignSelf: "center",
     flexDirection: "row",
+    marginTop: 50,
+    marginBottom: 50,
   },
   buttonText: {
     marginLeft: 4,
